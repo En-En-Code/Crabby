@@ -9,8 +9,6 @@ pub static SAFE_MASK: [u64; 2] = [
 (FILE_C | FILE_D | FILE_E | FILE_F) & (ROW_2 | ROW_3 | ROW_4)
 ];
 
-/// The square map for
-#[rustfmt_skip]
 pub static SQUARE_MAP: [usize; 64] = [
 56, 57, 58, 59, 60, 61, 62, 63,
 48, 49, 50, 51, 52, 53, 54, 55,
