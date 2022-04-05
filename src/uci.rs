@@ -82,7 +82,7 @@ pub fn perft(board: &Board, params: &mut Params) {
     println!("total = {}\n", board.perft(depth, true));
 }
 
-pub fn positions(path: &str, searcher: &mut Searcher, do_work: &mut FnMut(&mut Searcher)) {
+pub fn positions(path: &str, searcher: &mut Searcher, do_work: &mut dyn FnMut(&mut Searcher)) {
     let file = match File::open(path) {
         Ok(file) => BufReader::new(file),
         Err(e)   => panic!("Test suite {} could not be read. {:?}", path, e)

@@ -196,7 +196,7 @@ impl Board {
 
         let mut eval = 1000*1000;
 
-        let occ = bb[ALL | us] | bb[ALL | opp];;
+        let occ = bb[ALL | us] | bb[ALL | opp];
 
         if us == WHITE {
             eval -= count((bb[KNIGHT | us] | bb[BISHOP | us])   & ROW_1) * 50;

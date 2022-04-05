@@ -97,7 +97,7 @@ pub fn bishop_attacks(piece: u64, from: u32, occ: u64) -> u64 {
     get_attacks(piece, occ, anti_diag(from))
 }
 
-pub fn for_all(mut pieces: u64, do_work: &mut FnMut(u32)) {
+pub fn for_all(mut pieces: u64, do_work: &mut dyn FnMut(u32)) {
     while pieces != 0 {
         do_work(bit_pop(&mut pieces));
     }

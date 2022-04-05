@@ -64,7 +64,7 @@ impl Board {
 
         let en_passant = match ep_sq[..] {
             ['-'] => 0,
-            [sc @ 'a'...'h', sr @ '3', '6'] => 1 << to_pos(sc, sr),
+            [sc @ 'a'..='h', sr @ '3', '6'] => 1 << to_pos(sc, sr),
             _ => panic!("Invalid en passant token")
         };
 

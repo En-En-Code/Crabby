@@ -1,5 +1,3 @@
-//! Handle the transformation from and to strings for associated types
-use std::ascii::AsciiExt;
 use std::fmt::{Display, Formatter, Result};
 
 use board::Board;

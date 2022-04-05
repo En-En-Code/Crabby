@@ -6,10 +6,10 @@ use _move::Move;
 use board::*;
 use util::lsb;
 
-static mut piece_keys: [u64; 64*6*2] = [0; 64*6*2];
-static mut castle_keys: [u64; 16] = [0; 16];
-static mut ep_keys: [u64; 8] = [0; 8];
-static mut color_key: u64 = 0;
+static mut PIECE_KEYS: [u64; 64*6*2] = [0; 64*6*2];
+static mut CASTLE_KEYS: [u64; 16] = [0; 16];
+static mut EP_KEYS: [u64; 8] = [0; 8];
+static mut COLOR_KEY: u64 = 0;
 
 fn set_random(arr: &mut [u64], rng: &mut StdRng) {
     for elem in arr.iter_mut() {
@@ -20,10 +20,10 @@ fn set_random(arr: &mut [u64], rng: &mut StdRng) {
 pub unsafe fn init() {
     let seed: &[usize] = &[0];
     let rng = &mut SeedableRng::from_seed(seed);
-    set_random(&mut piece_keys,  rng);
-    set_random(&mut castle_keys, rng);
-    set_random(&mut ep_keys,     rng);
-    color_key = rng.gen();
+    set_random(&mut PIECE_KEYS,  rng);
+    set_random(&mut CASTLE_KEYS, rng);
+    set_random(&mut EP_KEYS,     rng);
+    COLOR_KEY = rng.gen();
 }
 
 #[derive(Copy, Clone, PartialEq, Eq, Hash)]
@@ -46,23 +46,23 @@ impl Hash {
     pub fn set_piece(&mut self, pos: usize, sq: u8) {
         if sq != EMPTY {
             let index = pos + ((sq & PIECE) >> 1) as usize * 64 + (sq & COLOR) as usize * 384;
-            self.val ^= unsafe { piece_keys[index] };
+            self.val ^= unsafe { PIECE_KEYS[index] };
         }
     }
 
     pub fn set_castling(&mut self, castling: u8) {
-        self.val ^= unsafe { castle_keys[castling as usize] };
+        self.val ^= unsafe { CASTLE_KEYS[castling as usize] };
     }
 
     pub fn set_ep(&mut self, en_passant: u64) {
         if en_passant != 0 {
             let file = lsb(en_passant) % 8;
-            self.val ^= unsafe { ep_keys[file as usize] };
+            self.val ^= unsafe { EP_KEYS[file as usize] };
         }
     }
 
     pub fn flip_color(&mut self) {
-        self.val ^= unsafe { color_key };
+        self.val ^= unsafe { COLOR_KEY };
     }
 
     pub fn sub(&self) -> u16 {
