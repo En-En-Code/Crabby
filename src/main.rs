@@ -1,23 +1,5 @@
-extern crate itertools;
-extern crate rand;
-extern crate time;
-
-#[macro_use]
-pub mod util;
-
-pub mod bitboard;
-pub mod board;
-pub mod evaluation;
-pub mod magics;
-pub mod _move;
-pub mod print;
-pub mod search;
-pub mod table;
-pub mod testing;
-pub mod timer;
-pub mod types;
-pub mod uci;
+extern crate crabbylib;
 
 pub fn main() {
-    uci::main_loop();
+    crabbylib::uci::main_loop();
 }

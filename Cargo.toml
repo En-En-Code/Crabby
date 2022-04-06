@@ -3,10 +3,25 @@ authors = ["Alex Johnson"]
 name = "crabby"
 version = "2.0.0"
 
+[lib]
+name = "crabbylib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "crabby"
+path = "src/main.rs"
+
 [dependencies]
 itertools = "*"
 rand = "*"
 time = "*"
+
+[dev-dependencies]
+bencher = "*"
+
+[[bench]]
+name = "testing"
+harness = false
 
 [profile]
 
